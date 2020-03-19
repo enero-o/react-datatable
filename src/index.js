@@ -33,7 +33,7 @@ class ReactDatatable extends Component {
         excel: (props.config && props.config.button && props.config.button.excel) ? props.config.button.excel : false,
         print: (props.config && props.config.button && props.config.button.print) ? props.config.button.print : false,
         csv: (props.config && props.config.button && props.config.button.csv) ? props.config.button.csv : false,
-        extra : (props.config && props.config.button && props.config.button.extra) ? props.config.button.extra : false,
+        extra: (props.config && props.config.button && props.config.button.extra) ? props.config.button.extra : false,
       },
       filename: (props.config && props.config.filename) ? props.config.filename : "table",
       key_column: props.config && props.config.key_column ? props.config.key_column : "id",
@@ -104,7 +104,7 @@ class ReactDatatable extends Component {
     return records.slice(page_number * page_size, (page_number + 1) * page_size);
   }
 
-  numPages(totalRecord){
+  numPages(totalRecord) {
     return Math.ceil(totalRecord / this.state.page_size);
   }
 
@@ -273,7 +273,7 @@ class ReactDatatable extends Component {
     win.close();
   }
 
-  convertToCSV(objArray){
+  convertToCSV(objArray) {
     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     let str = '';
     for (let i = 0; i < array.length; i++) {
@@ -287,7 +287,7 @@ class ReactDatatable extends Component {
     return str;
   }
 
-  exportToCSV(headers, items, fileTitle){
+  exportToCSV(headers, items, fileTitle) {
     var headers = {};
     // add columns in sheet array
     for (let column of this.props.columns) {
@@ -338,7 +338,7 @@ class ReactDatatable extends Component {
     }
   }
 
-  onChange(){
+  onChange() {
     let tableData = {
       filter_value: this.state.filter_value,
       page_number: this.state.page_number,
@@ -397,7 +397,7 @@ class ReactDatatable extends Component {
       isFirst = this.isFirst();
       isLast = this.isLast();
       filterRecords = this.paginate(filterRecords);
-    }else{
+    } else {
       filterRecords = this.props.records;
       totalRecords = this.props.total_record;
       pages = this.pages = this.numPages(totalRecords);
@@ -427,7 +427,7 @@ class ReactDatatable extends Component {
           exportToExcel={this.exportToExcel.bind(this)}
           exportToCSV={this.exportToCSV.bind(this)}
           exportToPDF={this.exportToPDF.bind(this)}
-          extraButtons={this.props.extraButtons}/>
+          extraButtons={this.props.extraButtons} />
         <div className="row table-body asrt-table-body" style={style.table_body} id={(this.props.id) ? this.props.id + "-table-body" : ""}>
           <div className="col-md-12">
             <table className={this.props.className} id={this.props.id}>
@@ -436,10 +436,10 @@ class ReactDatatable extends Component {
                   {
                     this.props.columns.map((column, index) => {
                       let classText = (column.sortable) ? "sortable " : "",
-                      width = (column.width) ? column.width : "",
-                      align = (column.align) ? column.align : "",
-                      sortOrder = "",
-                      columnStyle = {};
+                        width = (column.width) ? column.width : "",
+                        align = (column.align) ? column.align : "",
+                        sortOrder = "",
+                        columnStyle = {};
                       if (column.sortable && this.state.sort.column == column.key) {
                         sortOrder = this.state.sort.order;
                         classText += (sortOrder) ? " " + sortOrder : "";
