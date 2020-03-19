@@ -40,10 +40,10 @@ let style = {
   },
   // TODO this should come from external styling
   sort_asc: {
-    backgroundImage: `url(${upArrow})`
+    backgroundImage: `url()`
   },
   sort_desc: {
-    backgroundImage: `url(${downArrow})`
+    backgroundImage: `url()`
   },
 
 };
@@ -66,7 +66,7 @@ class ReactDatatable extends Component {
         excel: (props.config && props.config.button && props.config.button.excel) ? props.config.button.excel : false,
         print: (props.config && props.config.button && props.config.button.print) ? props.config.button.print : false,
         csv: (props.config && props.config.button && props.config.button.csv) ? props.config.button.csv : false,
-        extra : (props.config && props.config.button && props.config.button.extra) ? props.config.button.extra : false,
+        extra: (props.config && props.config.button && props.config.button.extra) ? props.config.button.extra : false,
       },
       filename: (props.config && props.config.filename) ? props.config.filename : "table",
       language: {
@@ -133,7 +133,7 @@ class ReactDatatable extends Component {
     return records.slice(page_number * page_size, (page_number + 1) * page_size);
   }
 
-  numPages(totalRecord){
+  numPages(totalRecord) {
     return Math.ceil(totalRecord / this.state.page_size);
   }
 
@@ -144,7 +144,7 @@ class ReactDatatable extends Component {
         previous_page: this.state.page_number,
         current_page: nextPage
       };
-    if(this.isFirst()) return false;
+    if (this.isFirst()) return false;
     this.setState({
       page_number: nextPage
     }, () => {
@@ -160,7 +160,7 @@ class ReactDatatable extends Component {
         previous_page: this.state.page_number,
         current_page: nextPage
       };
-    if(this.isLast()) return false;
+    if (this.isLast()) return false;
     this.setState({
       page_number: nextPage
     }, () => {
@@ -175,7 +175,7 @@ class ReactDatatable extends Component {
       previous_page: this.state.page_number,
       current_page: 1
     };
-    if(this.isFirst()) return false;
+    if (this.isFirst()) return false;
     this.setState({
       page_number: 1
     }, () => {
@@ -190,7 +190,7 @@ class ReactDatatable extends Component {
       previous_page: this.state.page_number,
       current_page: this.pages
     };
-    if(this.isLast()) return false;
+    if (this.isLast()) return false;
     this.setState({
       page_number: this.pages
     }, () => {
@@ -231,7 +231,7 @@ class ReactDatatable extends Component {
       for (let column of this.props.columns) {
         if (column.cell && typeof column.cell === "function") {
           sTable += "<td></td>";
-        }else if (record[column.key]) {
+        } else if (record[column.key]) {
           sTable += "<td>" + record[column.key] + "</td>";
         } else {
           sTable += "<td></td>";
@@ -242,20 +242,20 @@ class ReactDatatable extends Component {
     sTable += "</tbody>";
     sTable += "</table>";
     let uri = 'data:application/vnd.ms-excel;base64,',
-    template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>',
-    base64 = function (s) {
-      return window.btoa(unescape(encodeURIComponent(s)))
-    },
-    format = function (s, c) {
-      return s.replace(/{(\w+)}/g, function (m, p) {
-        return c[p];
-      })
-    };
+      template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>',
+      base64 = function (s) {
+        return window.btoa(unescape(encodeURIComponent(s)))
+      },
+      format = function (s, c) {
+        return s.replace(/{(\w+)}/g, function (m, p) {
+          return c[p];
+        })
+      };
     let ctx = {
       worksheet: this.config.filename || 'Worksheet',
       table: sTable
     },
-    href = uri + base64(format(template, ctx));
+      href = uri + base64(format(template, ctx));
     let anc = document.createElement('a');
     anc.setAttribute('href', href);
     anc.setAttribute('download', this.config.filename + '.xlsx');
@@ -279,7 +279,7 @@ class ReactDatatable extends Component {
       for (let column of this.props.columns) {
         if (column.cell && typeof column.cell === "function") {
           sTable += "<td></td>";
-        }else if (record[column.key]) {
+        } else if (record[column.key]) {
           sTable += "<td>" + record[column.key] + "</td>";
         } else {
           sTable += "<td></td>";
@@ -309,7 +309,7 @@ class ReactDatatable extends Component {
     win.close();
   }
 
-  convertToCSV(objArray){
+  convertToCSV(objArray) {
     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     let str = '';
     for (let i = 0; i < array.length; i++) {
@@ -323,7 +323,7 @@ class ReactDatatable extends Component {
     return str;
   }
 
-  exportToCSV(headers, items, fileTitle){
+  exportToCSV(headers, items, fileTitle) {
     var headers = {};
     // add columns in sheet array
     for (let column of this.props.columns) {
@@ -338,7 +338,7 @@ class ReactDatatable extends Component {
         if (column.cell && typeof column.cell === "function") {
           newRecord[column.key] = "";
         } else if (record[column.key]) {
-          let colValue  = record[column.key].replace(/"/g, '""');
+          let colValue = record[column.key].replace(/"/g, '""');
           newRecord[column.key] = '"' + colValue + '"';
         } else {
           newRecord[column.key] = "";
@@ -371,7 +371,7 @@ class ReactDatatable extends Component {
     }
   }
 
-  onChange(){
+  onChange() {
     let tableData = {
       filter_value: this.state.filter_value,
       page_number: this.state.page_number,
@@ -396,7 +396,7 @@ class ReactDatatable extends Component {
 
   render() {
     let filterRecords, totalRecords, pages, isFirst, isLast;
-    if(this.props.dynamic === false){
+    if (this.props.dynamic === false) {
       // let records = _.orderBy(this.props.records, [{ [this.state.sort.column]: Number }], [this.state.sort.order]),
       let records = _.orderBy(this.props.records, (o) => {
         let colVal = o[this.state.sort.column];
@@ -407,7 +407,7 @@ class ReactDatatable extends Component {
           } else {
             return new Number(colVal);
           }
-        }else if (typeofColVal == "number") {
+        } else if (typeofColVal == "number") {
           return new Number(colVal);
         }
       }, [this.state.sort.order]),
@@ -421,7 +421,7 @@ class ReactDatatable extends Component {
       isFirst = this.isFirst();
       isLast = this.isLast();
       filterRecords = this.paginate(filterRecords);
-    }else{
+    } else {
       filterRecords = this.props.records;
       totalRecords = this.props.total_record;
       pages = this.pages = this.numPages(totalRecords);
@@ -451,7 +451,7 @@ class ReactDatatable extends Component {
           exportToExcel={this.exportToExcel.bind(this)}
           exportToCSV={this.exportToCSV.bind(this)}
           exportToPDF={this.exportToPDF.bind(this)}
-          extraButtons={this.props.extraButtons}/>
+          extraButtons={this.props.extraButtons} />
         <div className="row table-body asrt-table-body" style={style.table_body} id={(this.props.id) ? this.props.id + "-table-body" : ""}>
           <div className="col-md-12">
             <table className={this.props.className} id={this.props.id}>
@@ -460,10 +460,10 @@ class ReactDatatable extends Component {
                   {
                     this.props.columns.map((column, index) => {
                       let classText = (column.sortable) ? "sortable " : "",
-                      width = (column.width) ? column.width : "",
-                      align = (column.align) ? column.align : "",
-                      sortOrder = "",
-                      columnStyle = {};
+                        width = (column.width) ? column.width : "",
+                        align = (column.align) ? column.align : "",
+                        sortOrder = "",
+                        columnStyle = {};
                       if (column.sortable && this.state.sort.column == column.key) {
                         sortOrder = this.state.sort.order;
                         classText += (sortOrder) ? " " + sortOrder : "";
@@ -473,7 +473,7 @@ class ReactDatatable extends Component {
                       classText += " text-" + align;
                       /*if(column.className)
                       classText += " " + column.className;*/
-                      if(column.TrOnlyClassName)
+                      if (column.TrOnlyClassName)
                         classText += " " + column.TrOnlyClassName;
                       return (<th
                         key={(column.key) ? column.key : column.text}
@@ -495,12 +495,12 @@ class ReactDatatable extends Component {
                       {
                         this.props.columns.map((column, colIndex) => {
                           if (column.cell && typeof column.cell === "function") {
-                            return (<td className={column.className} key={(column.key) ? column.key : column.text}>{column.cell(record,rowIndex)}</td>);
-                          }else if (record[column.key]) {
+                            return (<td className={column.className} key={(column.key) ? column.key : column.text}>{column.cell(record, rowIndex)}</td>);
+                          } else if (record[column.key]) {
                             return (<td className={column.className} key={(column.key) ? column.key : column.text}>
                               {record[column.key]}
                             </td>);
-                          }else {
+                          } else {
                             return <td className={column.className} key={(column.key) ? column.key : column.text}></td>
                           }
                         })
@@ -527,14 +527,14 @@ class ReactDatatable extends Component {
           lastPage={this.lastPage.bind(this)}
           previousPage={this.previousPage.bind(this)}
           nextPage={this.nextPage.bind(this)}
-          changePageSize={this.changePageSize.bind(this)}/>
+          changePageSize={this.changePageSize.bind(this)} />
       </div>
     )
   }
 }
 
-function TableHeader(props){
-  if(props.config.show_length_menu==true || props.config.show_filter==true ||props.config.button.excel==true || props.config.button.csv==true || props.config.button.print==true){
+function TableHeader(props) {
+  if (props.config.show_length_menu == true || props.config.show_filter == true || props.config.button.excel == true || props.config.button.csv == true || props.config.button.print == true) {
     return (
       <div className="row table-head asrt-table-head" id={(props.id) ? props.id + "-table-head" : ""}>
         <div className="col-md-6">
@@ -609,23 +609,23 @@ function TableHeader(props){
                 </span>
               </button>
             ) : null}
-            {(props.config.button.extra==true) ? (
-              props.extraButtons.map((elem,index)=>{
-                  elem.clickCount=0;
-                  elem.singleClickTimer='';
-                  return (
-                      <button className={elem.className ? elem.className : "btn btn-primary buttons-pdf"}
-                        tabIndex="0"
-                        aria-controls="configuration_tbl"
-                        title={elem.title?elem.title:"Export to PDF"}
-                        style={style.table_tool_btn}
-                        onClick={(event)=>{
-                          elem.onClick(event);
-                        }}
-                        key={index}>
-                          {elem.children}
-                      </button>
-                  )
+            {(props.config.button.extra == true) ? (
+              props.extraButtons.map((elem, index) => {
+                elem.clickCount = 0;
+                elem.singleClickTimer = '';
+                return (
+                  <button className={elem.className ? elem.className : "btn btn-primary buttons-pdf"}
+                    tabIndex="0"
+                    aria-controls="configuration_tbl"
+                    title={elem.title ? elem.title : "Export to PDF"}
+                    style={style.table_tool_btn}
+                    onClick={(event) => {
+                      elem.onClick(event);
+                    }}
+                    key={index}>
+                    {elem.children}
+                  </button>
+                )
               })
             ) : null}
           </div>
@@ -637,8 +637,8 @@ function TableHeader(props){
   }
 }
 
-function TableFooter(props){
-  if(props.config.show_info==true || props.config.show_pagination==true){
+function TableFooter(props) {
+  if (props.config.show_info == true || props.config.show_pagination == true) {
     return (
       <div className="row table-foot asrt-table-foot" id={(props.id) ? props.id + "-table-foot" : ""}>
         <div className="col-md-6">
