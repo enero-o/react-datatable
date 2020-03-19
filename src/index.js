@@ -6,11 +6,8 @@
  * @date           14 Dec, 2018
  */
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
-import './style.css';
-import upArrow from './up-arrow.png';
-import downArrow from './down-arrow.png';
 
 let style = {
   table_body: {
@@ -41,12 +38,14 @@ let style = {
   table_tool_btn: {
     marginRight: '5px'
   },
+  // TODO this should come from external styling
   sort_asc: {
     backgroundImage: `url(${upArrow})`
   },
   sort_desc: {
     backgroundImage: `url(${downArrow})`
-  }
+  },
+
 };
 
 class ReactDatatable extends Component {
