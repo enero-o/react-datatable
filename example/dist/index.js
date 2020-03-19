@@ -274,7 +274,6 @@ process.umask = function() { return 0; };
 "use strict";
 /*
 object-assign
-<<<<<<< HEAD
 
 
 /* eslint-disable no-unused-vars */
@@ -287,7 +286,7 @@ var propIsEnumerable = Object.prototype.propertyIsEnumerable;
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
-<<<<<<< HEAD
+
 function isEventSupported(eventNameSuffix) {
   if (!canUseDOM) {
     return false;
