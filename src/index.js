@@ -7,7 +7,10 @@
  */
 
 import React, { Component } from 'react';
-import _ from 'lodash';
+import each from 'lodash/each';
+import orderBy from 'lodash/orderBy';
+import includes from 'lodash/includes';
+import indexOf from 'lodash/indexOf';
 
 let style = {
   table_body: {
@@ -385,9 +388,9 @@ class ReactDatatable extends Component {
     let filterValue = this.state.filter_value;
     return records.filter((record) => {
       let allow = false;
-      _.each(this.props.columns, (column, key) => {
+      each(this.props.columns, (column, key) => {
         if (record[column.key]) {
-          allow = _.includes(record[column.key].toString().toLowerCase(), filterValue.toString().toLowerCase()) ? true : allow;
+          allow = includes(record[column.key].toString().toLowerCase(), filterValue.toString().toLowerCase()) ? true : allow;
         }
       });
       return allow;
@@ -397,8 +400,8 @@ class ReactDatatable extends Component {
   render() {
     let filterRecords, totalRecords, pages, isFirst, isLast;
     if (this.props.dynamic === false) {
-      // let records = _.orderBy(this.props.records, [{ [this.state.sort.column]: Number }], [this.state.sort.order]),
-      let records = _.orderBy(this.props.records, (o) => {
+      // let records = orderBy(this.props.records, [{ [this.state.sort.column]: Number }], [this.state.sort.order]),
+      let records = orderBy(this.props.records, (o) => {
         let colVal = o[this.state.sort.column];
         let typeofColVal = typeof colVal;
         if (typeofColVal == "string") {
@@ -489,7 +492,7 @@ class ReactDatatable extends Component {
               </thead>
               <tbody>
                 {(filterRecords.length) ? filterRecords.map((record, rowIndex) => {
-                  rowIndex = _.indexOf(this.props.records, record);
+                  rowIndex = indexOf(this.props.records, record);
                   return (
                     <tr key={record.id} onClick={(e) => this.props.onRowClicked(e, record, rowIndex)}>
                       {
@@ -545,7 +548,7 @@ function TableHeader(props) {
                   {(props.lengthMenuText[0]) ? props.lengthMenuText[0] : ''}
                 </span>
               </div>
-              {(_.includes(props.config.language.length_menu, '_MENU_')) ? (
+              {(includes(props.config.language.length_menu, '_MENU_')) ? (
                 <select type="text" className="form-control" style={style.table_size_dropdown}
                   onChange={props.changePageSize}>
                   {props.config.length_menu.map((value, key) => {
