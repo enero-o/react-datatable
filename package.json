@@ -23,13 +23,10 @@
     "start": "webpack --watch",
     "build": "webpack",
     "transpile": "babel src -d lib --copy-files",
-    "prepublishOnly": "npm run transpile",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepublishOnly": "npm run transpile"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
-    "snyk": "^1.316.1"
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "react": "^16.0.0",
