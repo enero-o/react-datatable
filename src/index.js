@@ -8,7 +8,6 @@
 
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import './assets/css/style.css';
 import TableHeader from './components/TableHeader';
 import TableFooter from './components/TableFooter';
 import style from './style';
