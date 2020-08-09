@@ -1,5 +1,5 @@
-import upArrow from '../assets/img/up-arrow.png';
-import downArrow from '../assets/img/down-arrow.png';
+// import upArrow from '../assets/img/up-arrow.png';
+// import downArrow from '../assets/img/down-arrow.png';
 
 export default {
     table_body: {
@@ -31,9 +31,9 @@ export default {
       marginRight: '5px'
     },
     sort_asc: {
-      backgroundImage: `url(${upArrow})`
+      backgroundImage: `url()`
     },
     sort_desc: {
-      backgroundImage: `url(${downArrow})`
+      backgroundImage: `url()`
     }
   }
